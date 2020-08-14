@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Cornerstone
 {
@@ -12,6 +13,16 @@ namespace Cornerstone
             builder.AddProvider(new FileLoggerProvider(path,configuration));
 
             return builder;
+        }
+
+        public static FrameworkConstruction UseFileLogger(this FrameworkConstruction construction, string logPath = "log.txt")
+        {
+            construction.Services.AddLogging(options =>
+            {
+                options.AddFile(logPath);
+            });
+
+            return construction;
         }
     }
 }

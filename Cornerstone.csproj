@@ -4,9 +4,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Cornerstone</RootNamespace>
     <AssemblyName>Cornerstone</AssemblyName>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Alexander Redwinter</Authors>
     <Company>Redwinter</Company>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <Description>Framework for .Net Core 3</Description>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
