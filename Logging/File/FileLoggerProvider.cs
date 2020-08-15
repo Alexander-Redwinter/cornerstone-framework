@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
-using System.IO;
 
 namespace Cornerstone
 {
@@ -18,7 +17,7 @@ namespace Cornerstone
         }
         public ILogger CreateLogger(string categoryName)
         {
-            return loggers.GetOrAdd(categoryName, name => new FileLogger(name,filePath, configuration));
+            return loggers.GetOrAdd(categoryName, name => new FileLogger(name, filePath, configuration));
         }
 
         public void Dispose()

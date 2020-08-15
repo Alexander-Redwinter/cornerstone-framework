@@ -10,7 +10,7 @@ namespace Cornerstone
             if (configuration == null)
                 configuration = new FileLoggerConfiguration();
 
-            builder.AddProvider(new FileLoggerProvider(path,configuration));
+            builder.AddProvider(new FileLoggerProvider(path, configuration));
 
             return builder;
         }

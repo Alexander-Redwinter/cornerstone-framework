@@ -2,10 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace Cornerstone
 {
@@ -54,7 +51,7 @@ namespace Cornerstone
         {
             construction.AddDefaultExceptionHandler();
 
-           
+
 
             construction.AddDefaultLogger();
 

@@ -7,7 +7,7 @@ namespace Cornerstone
         public void Handle(Exception exception)
         {
             //TODO Localization
-            Framework.Logger.LogCriticalSource("Unhandled Exception",exception:exception);
+            Framework.Logger.LogCriticalSource("Unhandled Exception", exception: exception);
         }
     }
 }

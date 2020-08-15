@@ -37,9 +37,9 @@ namespace Cornerstone
 
             var logTimeString = configuration.LogTime ? $"{currentTime}" : "";
 
-            var message = formatter(state,exception);
+            var message = formatter(state, exception);
 
-            var log =  $"{logTimeString} {message} {Environment.NewLine}";
+            var log = $"{logTimeString} {message} {Environment.NewLine}";
 
             var normalizedPath = filePath.ToUpper();
 
