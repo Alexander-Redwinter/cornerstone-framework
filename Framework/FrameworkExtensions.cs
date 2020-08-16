@@ -50,9 +50,6 @@ namespace Cornerstone
         public static FrameworkConstruction UseDefaultServices(this FrameworkConstruction construction)
         {
             construction.AddDefaultExceptionHandler();
-
-
-
             construction.AddDefaultLogger();
 
             return construction;

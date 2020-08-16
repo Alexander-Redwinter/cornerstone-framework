@@ -59,5 +59,65 @@ namespace Cornerstone
             return await request.GetResponseAsync() as HttpWebResponse;
 
         }
+
+        public static async Task<WebRequestResult<TResponse>> PostAsync<TResponse>(string url, object content = null
+            , ContentSerializers sendType = ContentSerializers.Json
+            , ContentSerializers returnType = ContentSerializers.Json)
+        {
+            var response = await PostAsync(url, content, sendType, returnType);
+
+            var result = response.CreateWebRequestResult<TResponse>();
+
+            if (result.StatusCode != HttpStatusCode.OK)
+            {
+                //TODO LOCALIZE
+                result.ErrorMessage = $"Server returned {response.StatusCode} {response.StatusDescription}";
+                return result;
+            }
+
+            if (string.IsNullOrEmpty(result.RawServerResponse))
+                return result;
+
+            try
+            {
+
+                if (!response.ContentType.ToLower().Contains(returnType.ToMimeString().ToLower()))
+                {
+                    result.ErrorMessage = $"Unexpected type. Expected {returnType.ToMimeString()}, got {response.ContentType}";
+                    return result;
+                }
+
+
+                if (returnType == ContentSerializers.Json)
+                {
+                    result.ServerResponse = JsonConvert.DeserializeObject<TResponse>(result.RawServerResponse);
+
+                }
+
+                else if (returnType == ContentSerializers.Xml)
+                {
+                    var xmlSerializer = new XmlSerializer(typeof(TResponse));
+
+                    using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(result.RawServerResponse)))
+                    {
+                        result.ServerResponse = (TResponse)xmlSerializer.Deserialize(ms);
+                    }
+                }
+
+                else
+                {
+                    result.ErrorMessage = "Unknown return type";
+                    return result;
+                }
+            }
+            catch
+            {
+                result.ErrorMessage = "Failed to deserialize";
+                return result;
+            }
+            
+            return result;
+
+        }
     }
 }
